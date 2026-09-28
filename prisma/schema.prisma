@@ -19,9 +19,11 @@ model Message {
   name      String
   email     String
   message   String
+  tag       String?  // ← เพิ่มใหม่
   authorId  String?
   createdAt DateTime @default(now())
 }
+
 
 model Comment {
   id        String   @id @default(cuid())
