@@ -34,7 +34,12 @@ export async function createMessage(raw: unknown, authorId?: string) {
 }
 
 export async function listMessages(search?: string) {
-  return MessageModel.getMessages(search);
+  const all = await MessageModel.getMessages();
+  if (!search) return all;
+  return all.filter((m) =>
+    m.name.includes(search) ||
+    m.message.includes(search)
+  );
 }
 
 export async function getMessageById(id: string) {
