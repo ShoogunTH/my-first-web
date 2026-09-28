@@ -80,3 +80,15 @@ export async function removeComment(id: string, sessionUserId?: string) {
     throw err;
   }
 }
+
+export async function reactToComment(id: string, emoji: string) {
+  if (!emoji || emoji.trim() === '') {
+    throw new ValidationError('ต้องระบุ emoji ที่ต้องการ react');
+  }
+
+  const updated = await CommentModel.toggleCommentReaction(id, emoji.trim());
+  if (!updated) {
+    throw new NotFoundError('ไม่พบความคิดเห็นนี้');
+  }
+  return updated;
+}

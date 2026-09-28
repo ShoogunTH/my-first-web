@@ -31,5 +31,6 @@ model Comment {
   author    String
   authorId  String?
   text      String
+  reactions String?  @default("{}")
   createdAt DateTime @default(now())
 }

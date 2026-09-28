@@ -1,10 +1,15 @@
 import { prisma } from './prisma';
 
+export interface ReactionRecord {
+  [emoji: string]: number;
+}
+
 export interface CommentData {
   postId: string;
   author: string;
   text: string;
   authorId?: string;
+  reactions?: string;
 }
 
 export async function addComment(data: CommentData) {
@@ -43,3 +48,25 @@ export async function deleteComment(id: string) {
     where: { id },
   });
 }
+
+export async function toggleCommentReaction(id: string, emoji: string) {
+  const comment = await prisma.comment.findUnique({ where: { id } });
+  if (!comment) return null;
+
+  let currentReactions: Record<string, number> = {};
+  try {
+    currentReactions = comment.reactions ? JSON.parse(comment.reactions) : {};
+  } catch {
+    currentReactions = {};
+  }
+
+  currentReactions[emoji] = (currentReactions[emoji] || 0) + 1;
+
+  return prisma.comment.update({
+    where: { id },
+    data: {
+      reactions: JSON.stringify(currentReactions),
+    },
+  });
+}
+
