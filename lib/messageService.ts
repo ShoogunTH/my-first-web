@@ -33,7 +33,8 @@ export async function createMessage(raw: unknown, authorId?: string) {
   }
 }
 
-export async function listMessages(search?: string) {
+// Support optional tag filter
+export async function listMessages(search?: string, tag?: string) {
   return MessageModel.getMessages(search);
 }
 
