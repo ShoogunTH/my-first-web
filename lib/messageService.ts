@@ -33,12 +33,13 @@ export async function createMessage(raw: unknown, authorId?: string) {
   }
 }
 
-export async function listMessages(search?: string) {
+// Conflict practice: custom search query filtering
+export async function listMessages(searchQuery?: string) {
   const all = await MessageModel.getMessages();
-  if (!search) return all;
+  if (!searchQuery) return all;
   return all.filter((m) =>
-    m.name.includes(search) ||
-    m.message.includes(search)
+    m.name.includes(searchQuery) ||
+    m.message.includes(searchQuery)
   );
 }
 
