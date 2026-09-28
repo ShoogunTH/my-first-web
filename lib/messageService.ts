@@ -23,6 +23,7 @@ export async function createMessage(raw: unknown, authorId?: string) {
       name: validated.name,
       email: validated.email,
       message: safeMessage,
+      tag: validated.tag,
       authorId,
     });
   } catch (err) {

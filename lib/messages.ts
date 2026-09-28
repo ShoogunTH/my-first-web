@@ -4,6 +4,7 @@ export interface ContactMessageData {
   name: string;
   email: string;
   message: string;
+  tag?: string;
   authorId?: string;
 }
 
@@ -13,6 +14,7 @@ export async function addMessage(data: ContactMessageData) {
       name: data.name,
       email: data.email,
       message: data.message,
+      tag: data.tag || null,
       authorId: data.authorId || null,
     },
   });

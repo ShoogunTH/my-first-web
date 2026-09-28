@@ -7,6 +7,7 @@ export default function ContactForm() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
+  const [tag, setTag] = useState('ทั่วไป');
   const [error, setError] = useState('');
   const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
 
@@ -33,7 +34,7 @@ export default function ContactForm() {
       const res = await fetch('/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name, email, message }),
+        body: JSON.stringify({ name, email, message, tag }),
       });
 
       if (!res.ok) { setStatus('error'); return; }
@@ -41,6 +42,7 @@ export default function ContactForm() {
       setName('');
       setEmail('');
       setMessage('');
+      setTag('ทั่วไป');
     } catch {
       setStatus('error');
     }
@@ -73,6 +75,20 @@ export default function ContactForm() {
           placeholder="example@domain.com"
           className="w-full px-4 py-3 rounded-xl bg-white border border-[#069CD5]/30 text-[#0F172A] placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[#069CD5] transition-all font-medium text-sm shadow-inner"
         />
+      </div>
+
+      <div>
+        <label className="block text-xs font-bold uppercase tracking-wider text-[#104887] mb-2">หมวดหมู่ / แท็ก (Tag)</label>
+        <select
+          value={tag}
+          onChange={(e) => setTag(e.target.value)}
+          className="w-full px-4 py-3 rounded-xl bg-white border border-[#069CD5]/30 text-[#0F172A] focus:outline-none focus:ring-2 focus:ring-[#069CD5] transition-all font-medium text-sm shadow-inner cursor-pointer"
+        >
+          <option value="ทั่วไป">📌 ทั่วไป (General)</option>
+          <option value="สอบถามข้อมูล">💬 สอบถามข้อมูล (Inquiry)</option>
+          <option value="แจ้งปัญหา">⚠️ แจ้งปัญหา (Bug Report)</option>
+          <option value="ข้อเสนอแนะ">💡 ข้อเสนอแนะ (Feedback)</option>
+        </select>
       </div>
 
       <div>
