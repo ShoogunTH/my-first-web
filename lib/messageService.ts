@@ -33,9 +33,23 @@ export async function createMessage(raw: unknown, authorId?: string) {
   }
 }
 
-// Support optional tag filter
 export async function listMessages(search?: string, tag?: string) {
-  return MessageModel.getMessages(search);
+  const all = await MessageModel.getMessages();
+  let filtered = all;
+
+  if (search) {
+    const q = search.toLowerCase();
+    filtered = filtered.filter((m) =>
+      m.name.toLowerCase().includes(q) ||
+      m.message.toLowerCase().includes(q)
+    );
+  }
+
+  if (tag) {
+    filtered = filtered.filter((m) => (m as { tag?: string | null }).tag === tag);
+  }
+
+  return filtered;
 }
 
 export async function getMessageById(id: string) {
