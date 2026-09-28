@@ -1,26 +1,131 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=Sarabun:wght@300;400;500;600;700;800&display=swap');
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --color-ocean-deep: #104887;
+  --color-ocean-blue: #069CD5;
+  --color-seafoam: #52D9CB;
+  --color-cream: #F4F0DE;
+  --background: #F4F0DE;
+  --foreground: #0F172A;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: radial-gradient(circle at 50% -10%, #E0F2FE 0%, #F0F9FF 50%, #F4F0DE 100%);
+  background-attachment: fixed;
+  color: #0F172A;
+  font-family: 'Plus Jakarta Sans', 'Sarabun', system-ui, -apple-system, sans-serif;
+  min-height: 100vh;
+  overflow-x: hidden;
+  perspective: 1200px;
+}
+
+/* Glassmorphism Ocean Cards for Light Mode */
+.ocean-glass-panel {
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(28px);
+  -webkit-backdrop-filter: blur(28px);
+  border: 1px solid rgba(6, 156, 213, 0.25);
+  box-shadow: 0 15px 35px rgba(16, 72, 135, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.9);
+}
+
+.ocean-glass-hover {
+  transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.ocean-glass-hover:hover {
+  border-color: rgba(82, 217, 203, 0.9);
+  box-shadow: 0 25px 50px rgba(6, 156, 213, 0.22), inset 0 1px 0 rgba(255, 255, 255, 1);
+  transform: translateY(-4px) scale(1.01) rotateX(1deg);
+}
+
+/* Shimmer Animated Ocean Text Gradient matching "DOING GOOD" / "Shochan" */
+.ocean-gradient-text {
+  background: linear-gradient(135deg, #104887 0%, #069CD5 40%, #52D9CB 70%, #104887 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shimmerText 5s linear infinite;
+}
+
+@keyframes shimmerText {
+  to {
+    background-position: 200% center;
+  }
+}
+
+.ocean-gradient-bg {
+  background: linear-gradient(135deg, #104887 0%, #069CD5 50%, #52D9CB 100%);
+  background-size: 200% 200%;
+  animation: gradientShift 6s ease infinite;
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.ocean-button {
+  background: linear-gradient(135deg, #104887 0%, #069CD5 100%);
+  color: #FFFFFF;
+  box-shadow: 0 8px 25px rgba(6, 156, 213, 0.35);
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.ocean-button:hover {
+  background: linear-gradient(135deg, #069CD5 0%, #52D9CB 100%);
+  color: #104887;
+  box-shadow: 0 14px 30px rgba(82, 217, 203, 0.45);
+  transform: translateY(-2px) scale(1.03);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #F0F9FF;
+}
+::-webkit-scrollbar-thumb {
+  background: #069CD5;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #104887;
+}
+
+/* Over-the-top Floating Orbs */
+@keyframes epicFloat1 {
+  0%, 100% {
+    transform: translate(0, 0) scale(1) rotate(0deg);
+    opacity: 0.5;
+  }
+  33% {
+    transform: translate(50px, -40px) scale(1.2) rotate(120deg);
+    opacity: 0.85;
+  }
+  66% {
+    transform: translate(-30px, 30px) scale(0.9) rotate(240deg);
+    opacity: 0.6;
+  }
+}
+
+@keyframes epicFloat2 {
+  0%, 100% {
+    transform: translate(0, 0) scale(1) rotate(0deg);
+    opacity: 0.6;
+  }
+  50% {
+    transform: translate(-60px, -50px) scale(1.25) rotate(-180deg);
+    opacity: 0.9;
+  }
+}
+
+.animate-epic-glow-1 {
+  animation: epicFloat1 12s ease-in-out infinite;
+}
+
+.animate-epic-glow-2 {
+  animation: epicFloat2 15s ease-in-out infinite;
 }

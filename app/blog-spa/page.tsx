@@ -189,7 +189,7 @@ function BlogSpaContent() {
         <div className="text-center py-16 bg-white rounded-xl border border-dashed border-gray-300 p-8">
           <div className="text-5xl mb-3">🔍</div>
           <h3 className="text-lg font-semibold text-gray-800 mb-1">
-            ไม่พบข้อมูลที่ตรงกับคำค้นหา "{searchQuery}"
+            ไม่พบข้อมูลที่ตรงกับคำค้นหา &quot;{searchQuery}&quot;
           </h3>
           <p className="text-gray-500 text-sm mb-4">
             ลองค้นหาด้วยคำอื่น หรือกดล้างการค้นหาเพื่อดูรายการทั้งหมด
